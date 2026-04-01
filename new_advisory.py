@@ -489,7 +489,4 @@ html_content = """<!DOCTYPE html>
 """
 
 with open('c:\\Users\\sy753\\OneDrive\\Pictures\\AIML\\project kinetic assingment\\advisory.html', 'w', encoding='utf-8') as f:
-    f.write(html_content)
-
-with open(r'c:\Users\sy753\OneDrive\Pictures\AIML\project kinetic assingment\advisory.html', 'w', encoding='utf-8') as f:
-    f.write(html_content)
+    f.write(html_content)r
