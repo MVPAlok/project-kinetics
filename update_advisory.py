@@ -1,0 +1,540 @@
+import re
+
+html_content = '''<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>KINETIC | Advisory & Consulting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff915a",
+                        "surface-container-low": "#131313",
+                        "surface-container-high": "#201f1f",
+                        "surface-container-lowest": "#090909",
+                        "on-surface-variant": "#adaaaa",
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        .structured-grid {
+            background-image: 
+                linear-gradient(rgba(255, 145, 90, 0.03) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(255, 145, 90, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .btn-primary { box-shadow: 0 5px 15px rgba(255, 106, 0, 0.1); }
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(255, 145, 90, 0.5);
+            transform: translateY(-2px);
+        }
+        .card-struct:hover {
+            border-color: rgba(255, 145, 90, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 15px rgba(255, 145, 90, 0.05);
+            background: rgba(255,255,255,0.03);
+        }
+        .connector-glow {
+            background: linear-gradient(90deg, rgba(255,145,90,0.8) 0%, rgba(255,145,90,0) 100%);
+            box-shadow: 0 0 15px rgba(255,145,90,0.8);
+        }
+        .section-gradient {
+            background: linear-gradient(180deg, rgba(11,11,11,0) 0%, rgba(15,15,15,1) 50%, rgba(11,11,11,0) 100%);
+        }
+        .text-glow { text-shadow: 0 0 10px rgba(255,145,90,0.5); }
+    </style>
+</head>
+<body class="bg-[#0b0b0b] text-white font-body selection:bg-primary selection:text-black antialiased">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 h-20 bg-[#0b0b0b]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
+        <div class="text-2xl font-black tracking-tighter text-white font-headline">KINETIC</div>
+        <div class="hidden md:flex items-center space-x-12">
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="home.html">ABOUT</a>
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-[#FF6A00] text-glow" href="advisory.html">ADVISORY</a>
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="#">ACADEMY</a>
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="#">CONTACT</a>
+        </div>
+        <button class="bg-[#FF6A00] hover:bg-[#ff7a31] btn-primary transition-all duration-300 font-headline uppercase tracking-tighter text-[11px] font-bold px-7 py-2.5 rounded text-white">
+            Client Portal
+        </button>
+    </div>
+</nav>
+
+<main class="pt-0">
+    <!-- 1. HERO SECTION -->
+    <section class="relative min-h-[100vh] flex flex-col justify-center overflow-hidden cyber-grid structured-grid">
+        <!-- Ambient background glows -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0a0a0a] via-[#0b0b0b] to-[#0b0b0b] z-0"></div>
+        <!-- Right side glow behind geometric shape -->
+        <div class="absolute top-[10%] right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none"></div>
+        <!-- Left side subtle glow -->
+        <div class="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] bg-[#FF6A00]/5 blur-[150px] rounded-full pointer-events-none"></div>
+        
+        <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-y-12"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-28 md:py-32">
+            <div class="lg:col-span-6 flex flex-col justify-center relative">
+                <!-- Small status indicator -->
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF6A00]"></span>
+                    </div>
+                    <span class="text-[10px] font-mono tracking-[0.3em] font-bold text-primary/90 uppercase">Consulting Practice . ACTIVE</span>
+                </div>
+                
+                <h1 class="text-5xl sm:text-6xl lg:text-[5.5rem] font-headline font-black leading-[1.05] sm:leading-[0.98] tracking-tighter mb-8">
+                    Strategic <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ffaa77] drop-shadow-[0_0_20px_rgba(255,106,0,0.5)]">Advisory</span> <br>
+                    For Resilience
+                </h1>
+                
+                <p class="text-on-surface-variant text-lg md:text-xl font-light mb-10 leading-relaxed max-w-[600px] border-l border-primary/30 pl-6">
+                    We align digital risk protocols, cybersecurity frameworks, and emerging AI governance for enterprise-scale sovereign protection.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-6">
+                    <button class="px-10 py-4 bg-[#FF6A00] text-white font-headline font-bold uppercase tracking-wider text-xs rounded transition-all btn-primary hover:-translate-y-1">
+                        Schedule Consultation
+                    </button>
+                    <button class="px-10 py-4 border border-white/10 glass-panel text-white font-headline font-bold uppercase tracking-wider text-xs rounded transition-all hover:bg-white/10 hover:-translate-y-1">
+                        View Capabilities
+                    </button>
+                </div>
+            </div>
+
+            <!-- Deep System Node Visual -->
+            <div class="lg:col-span-6 relative w-full h-full min-h-[500px] flex justify-end items-center hidden md:flex top-[-20px]">
+                <!-- Inner container with deep glass effect -->
+                <div class="relative w-full max-w-[550px] aspect-square rounded-[2rem] p-3 bg-gradient-to-br from-white/5 to-transparent border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.9)] backdrop-blur-xl animate-[pulse_6s_ease-in-out_infinite]">
+                    <div class="relative w-full h-full bg-[#0b0b0b]/90 rounded-xl border border-white/5 overflow-hidden flex flex-col p-10 justify-center items-center shadow-[inset_0_0_50px_rgba(255,106,0,0.05)]">
+                        
+                        <!-- Floating HUD texts -->
+                        <div class="absolute top-6 left-6 font-mono text-[9px] text-primary/60 tracking-widest uppercase">Risk Nodes 0.4.1</div>
+                        <div class="absolute bottom-6 right-6 font-mono text-[9px] text-primary/60 tracking-widest uppercase flex items-center gap-2">
+                            Sync <div class="w-10 h-[1px] bg-primary/60"></div> 100%
+                        </div>
+
+                        <!-- System graphic layout -->
+                        <div class="relative w-64 h-64">
+                            <!-- Circles / Ring depth -->
+                            <div class="absolute inset-0 rounded-full border border-primary/20 animate-[spin_15s_linear_infinite]"></div>
+                            <div class="absolute inset-4 rounded-full border border-white/5 border-dashed animate-[spin_20s_linear_infinite_reverse]"></div>
+                            <div class="absolute inset-12 rounded-full border border-primary/40 shadow-[0_0_30px_rgba(255,106,0,0.2)] bg-[#0b0b0b] z-10 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-5xl">schema</span>
+                            </div>
+                            
+                            <!-- Connected nodes / floating elements -->
+                            <div class="absolute top-0 left-12 w-8 h-8 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center z-20 animate-[bounce_3s_ease-in-out_infinite]">
+                                <span class="w-2 h-2 rounded-full bg-primary/80 glow"></span>
+                            </div>
+                            <div class="absolute bottom-4 right-8 w-10 h-10 rounded border border-primary/30 flex items-center justify-center z-20 bg-black/50 backdrop-blur animate-[pulse_4s_ease-in-out_infinite]">
+                                <span class="material-symbols-outlined text-white/70 text-sm">security</span>
+                            </div>
+                            <!-- Crosshair design detail -->
+                            <div class="absolute top-1/2 -left-10 w-8 h-[1px] bg-white/20"></div>
+                            <div class="absolute top-1/2 -right-10 w-8 h-[1px] bg-white/20"></div>
+                            <div class="absolute -top-10 left-1/2 w-[1px] h-8 bg-white/20"></div>
+                            <div class="absolute -bottom-10 left-1/2 w-[1px] h-8 bg-white/20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gradient Transition -->
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+    <!-- 2. PROBLEMS WE SOLVE -->
+    <section class="py-24 md:py-32 relative section-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-16 md:mb-20 text-center flex flex-col items-center">
+                <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/80 block mb-4 border border-primary/20 px-3 py-1 rounded bg-primary/5">Vulnerability Matrix</span>
+                <h2 class="text-3xl md:text-5xl font-headline font-bold leading-tight">The Risks We Help You Navigate</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Borderless variation for depth -->
+                <div class="glass-panel p-8 rounded-xl card-struct border border-transparent bg-gradient-to-b from-surface-container-high/40 to-transparent group">
+                    <div class="w-12 h-12 rounded bg-[#0b0b0b] border border-white/5 flex flex-col items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(255,106,0,0.2)] group-hover:border-primary/40 transition-all">
+                        <span class="material-symbols-outlined text-primary text-xl drop-shadow-[0_0_5px_rgba(255,106,0,0.5)]">lan</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-lg mb-3">Fragmented Security</h3>
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed">Disjoined tools and protocols creating critical visibility gaps across your digital attack surface.</p>
+                </div>
+                
+                <div class="glass-panel p-8 rounded-xl card-struct border border-white/5 bg-gradient-to-b from-surface-container-high/40 to-transparent group">
+                    <div class="w-12 h-12 rounded bg-[#0b0b0b] border border-white/10 flex flex-col items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(255,106,0,0.2)] group-hover:border-primary/40 transition-all">
+                        <span class="material-symbols-outlined text-primary text-xl">gavel</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-lg mb-3">Regulatory Pressure</h3>
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed">Increasingly complex global mandates and steep penalties for non-compliance and data mishandling.</p>
+                </div>
+                
+                <div class="glass-panel p-8 rounded-xl card-struct border border-white/5 bg-gradient-to-b from-surface-container-high/40 to-transparent group">
+                    <div class="w-12 h-12 rounded bg-[#0b0b0b] border border-white/10 flex flex-col items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(255,106,0,0.2)] group-hover:border-primary/40 transition-all">
+                        <span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-lg mb-3">AI & Emerging Risk</h3>
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed">Unregulated implementation of generative AI introducing novel vulnerabilities and leakage pathways.</p>
+                </div>
+
+                <!-- Glow variation for depth -->
+                <div class="glass-panel p-8 rounded-xl card-struct border border-primary/20 bg-gradient-to-b from-primary/[0.03] to-transparent group shadow-[0_0_15px_rgba(255,106,0,0.05)]">
+                    <div class="w-12 h-12 rounded bg-[#0b0b0b] border border-primary/30 flex flex-col items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(255,106,0,0.4)] transition-all">
+                        <span class="material-symbols-outlined text-primary text-xl drop-shadow-[0_0_8px_rgba(255,106,0,0.8)]">warning</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-lg mb-3">Operational Readiness</h3>
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed">Legacy infrastructure and rigid hierarchies impairing rapid response capabilities during incidents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CORE ADVISORY CAPABILITIES -->
+    <section class="py-24 md:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+        <!-- Ambient depth glow -->
+        <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-16 md:mb-20 flex flex-col justify-center">
+                <div class="w-10 h-[2px] bg-primary mb-4"></div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-primary/80 mb-3">Core Expertise</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-black">Our Advisory Capabilities</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Elite Capability Highlighted -->
+                <div class="p-10 lg:p-12 glass-panel border-t-2 border-primary/80 rounded-xl relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(255,106,0,0.08)] hover:border-primary transition-all">
+                    <div class="absolute top-6 right-6 hidden sm:block">
+                        <span class="px-3 py-1 border border-primary/30 bg-primary/10 rounded text-[9px] font-bold text-primary tracking-widest uppercase">Priority Access</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary text-4xl mb-6 blur-[1px] group-hover:blur-0 transition-all drop-shadow-[0_0_10px_rgba(255,106,0,0.5)]">policy</span>
+                    <h3 class="text-2xl lg:text-3xl font-headline font-bold mb-4">Digital Risk Audits</h3>
+                    <p class="text-on-surface-variant mb-10 font-light leading-relaxed">Comprehensive mapping of your technological architecture to identify structural weaknesses before they are exploited. We assess network perimeters, cloud environments, and internal access controls.</p>
+                    
+                    <div class="mt-auto">
+                        <div class="flex justify-between font-mono text-[9px] uppercase tracking-widest text-primary/60 mb-2">
+                            <span>Process Sync</span> <span>94%</span>
+                        </div>
+                        <div class="h-[2px] bg-white/5 w-full rounded-full overflow-hidden mb-6">
+                            <div class="h-full bg-gradient-to-r from-primary/20 via-primary to-primary/80 w-[94%] shadow-[0_0_10px_rgba(255,106,0,1)]"></div>
+                        </div>
+                        <div class="border-l-2 border-primary pl-4">
+                            <p class="text-sm text-white/90 font-medium font-body">Identify hidden vulnerabilities and drastically reduce enterprise risk exposure.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <!-- Standard Capability -->
+                    <div class="p-8 glass-panel border border-transparent hover:border-white/10 rounded-xl group card-struct flex flex-col justify-between bg-gradient-to-br from-white/[0.02] to-transparent">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-headline font-bold">Cyber Resilience Strategy</h3>
+                                <span class="material-symbols-outlined text-primary/40 text-xl group-hover:text-primary transition-colors group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)]">deployed_code</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-6 font-light leading-relaxed">Shifting from reactive defense to proactive continuity. We design incident response playbooks, disaster recovery plans, and cross-functional protocols.</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-[1px] bg-primary/40"></div>
+                            <p class="text-xs text-white/70 font-medium">Minimize downtime and ensure rapid recovery.</p>
+                        </div>
+                    </div>
+
+                    <!-- Standard Capability -->
+                    <div class="p-8 glass-panel border border-transparent hover:border-white/10 rounded-xl group card-struct flex flex-col justify-between bg-gradient-to-br from-white/[0.02] to-transparent">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-headline font-bold">AI Risk Governance</h3>
+                                <span class="material-symbols-outlined text-primary/40 text-xl group-hover:text-primary transition-colors group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)]">psychology</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-6 font-light leading-relaxed">Establishing guardrails for enterprise AI adoption. Usage policies, model evaluation criteria, and strict data security standards.</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-[1px] bg-primary/40"></div>
+                            <p class="text-xs text-white/70 font-medium">Accelerate innovation without compromising data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transiton -->
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+    <!-- 4. PROCESS / METHODOLOGY (Glowing Process Chain) -->
+    <section class="py-24 md:py-32 relative bg-[#0b0b0b] overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-primary/5 blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-24">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-primary/80 mb-3 block">Systematic Execution</span>
+                <h2 class="text-3xl md:text-5xl font-headline font-bold">Our Advisory Approach</h2>
+            </div>
+
+            <div class="relative max-w-5xl mx-auto">
+                <!-- Desktop Connected Glow Line (Stronger Flow Design) -->
+                <div class="hidden md:block absolute top-[24px] left-[10%] right-[10%] h-[1px] bg-white/10 z-0"></div>
+                <div class="hidden md:block absolute top-[24px] left-[10%] right-[20%] h-[2px] connector-glow z-0 animate-[pulse_3s_ease-in-out_infinite]"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-4 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 bg-black border-2 border-primary/80 rounded-full flex items-center justify-center font-mono text-sm font-bold text-white mb-6 shadow-[0_0_20px_rgba(255,106,0,0.3)] z-10 relative">
+                            <div class="absolute inset-0 bg-primary/20 rounded-full animate-ping opacity-50"></div>
+                            01
+                        </div>
+                        <h4 class="font-headline font-bold text-lg mb-2 text-glow">Assess</h4>
+                        <p class="text-xs text-on-surface-variant font-light px-2">Posture and architecture audit.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 bg-[#090909] border border-primary/40 rounded-full flex items-center justify-center font-mono text-sm font-bold text-white mb-6 shadow-[0_0_10px_rgba(255,106,0,0.1)] group-hover:border-primary/80 transition-all z-10 bg-black">02</div>
+                        <h4 class="font-headline font-bold text-lg mb-2">Analyze</h4>
+                        <p class="text-xs text-on-surface-variant font-light px-2">Threat modeling and gap ID.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 bg-[#090909] border border-primary/40 rounded-full flex items-center justify-center font-mono text-sm font-bold text-white mb-6 shadow-[0_0_10px_rgba(255,106,0,0.1)] group-hover:border-primary/80 transition-all z-10 bg-black">03</div>
+                        <h4 class="font-headline font-bold text-lg mb-2">Design</h4>
+                        <p class="text-xs text-on-surface-variant font-light px-2">Engineering secure frameworks.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 bg-[#090909] border border-white/20 rounded-full flex items-center justify-center font-mono text-sm font-bold text-white mb-6 group-hover:border-primary/50 transition-all z-10 bg-black">04</div>
+                        <h4 class="font-headline font-bold text-lg mb-2">Implement</h4>
+                        <p class="text-xs text-on-surface-variant font-light px-2">Deployment of operational controls.</p>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 bg-[#090909] border border-white/20 rounded-full flex items-center justify-center font-mono text-sm font-bold text-white mb-6 group-hover:border-primary/50 transition-all z-10 bg-black">05</div>
+                        <h4 class="font-headline font-bold text-lg mb-2">Optimize</h4>
+                        <p class="text-xs text-on-surface-variant font-light px-2">Continuous evaluation & scaling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transiton -->
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+    <!-- 5. FRAMEWORK & 6. OUTCOMES -->
+    <section class="py-24 md:py-32 relative overflow-hidden">
+        <!-- Subte radial background variation -->
+        <div class="absolute inset-0 bg-[#0a0a0a] z-0"></div>
+        <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24">
+                
+                <!-- Framework Alignment -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-headline font-bold mb-6">Aligned with Global Standards</h2>
+                    <p class="text-on-surface-variant font-light mb-12 text-lg leading-relaxed">Our methodologies map cleanly to the most rigorous international cybersecurity and data privacy regulations.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-2 border-primary/20 pl-6 py-2 hover:border-primary transition-all group">
+                            <span class="material-symbols-outlined text-primary/50 text-2xl mb-2 group-hover:text-primary transition-all group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)]">account_balance</span>
+                            <div class="font-headline font-bold text-lg">NIST</div>
+                            <div class="text-[10px] text-white/50 uppercase tracking-widest mt-1">Risk Framework</div>
+                        </div>
+                        <div class="border-l-2 border-primary/20 pl-6 py-2 hover:border-primary transition-all group">
+                            <span class="material-symbols-outlined text-primary/50 text-2xl mb-2 group-hover:text-primary transition-all group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)]">verified_user</span>
+                            <div class="font-headline font-bold text-lg">ISO 27001</div>
+                            <div class="text-[10px] text-white/50 uppercase tracking-widest mt-1">Security Standard</div>
+                        </div>
+                        <div class="border-l-2 border-primary/20 pl-6 py-2 hover:border-primary transition-all group mt-4">
+                            <span class="material-symbols-outlined text-primary/50 text-2xl mb-2 group-hover:text-primary transition-all group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)]">public</span>
+                            <div class="font-headline font-bold text-lg">GDPR</div>
+                            <div class="text-[10px] text-white/50 uppercase tracking-widest mt-1">Data Compliance</div>
+                        </div>
+                        <div class="border-l-2 border-primary/20 pl-6 py-2 hover:border-primary transition-all group mt-4">
+                            <span class="material-symbols-outlined text-primary/50 text-2xl mb-2 group-hover:text-primary transition-all group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)]">psychology</span>
+                            <div class="font-headline font-bold text-lg">AI Governance</div>
+                            <div class="text-[10px] text-white/50 uppercase tracking-widest mt-1">Ethics & Risk</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outcomes List -->
+                <div class="glass-panel p-10 rounded-[2rem] border border-white/5 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]">
+                    <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3">
+                        <div class="w-2 h-2 bg-primary rounded-full glow"></div> What You Gain
+                    </h2>
+                    <p class="text-on-surface-variant font-light mb-10 text-sm border-b border-white/5 pb-6">Investing in structured advisory mitigates catastrophic downside and enables secured expansion.</p>
+                    
+                    <div class="flex flex-col gap-6">
+                        <div class="flex gap-5 items-start">
+                            <div class="w-8 h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(255,106,0,0.1)]">
+                                <span class="material-symbols-outlined text-primary text-sm">trending_down</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-bold text-white mb-1">Reduced Risk Exposure</h4>
+                                <p class="text-sm text-on-surface-variant font-light">Measurable decrease in attack surface vectors.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-start">
+                            <div class="w-8 h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(255,106,0,0.1)]">
+                                <span class="material-symbols-outlined text-primary text-sm">assignment_turned_in</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-bold text-white mb-1">Regulatory Readiness</h4>
+                                <p class="text-sm text-on-surface-variant font-light">Audit-ready documentation and policy enforcement.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-start">
+                            <div class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-white/50 text-sm">layers</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-bold text-white mb-1">Scalable Infrastructure</h4>
+                                <p class="text-sm text-on-surface-variant font-light">Foundations designed linearly with user base growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Transiton -->
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+    <!-- 7. CASE STUDY / PROOF (Premium Depth) -->
+    <section class="py-24 md:py-32 relative bg-[#0b0b0b] section-gradient">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="relative glass-panel rounded-3xl p-10 md:p-16 overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,0.6)] group">
+                <!-- Large background texture / glow -->
+                <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-primary/20 blur-[120px] rounded-full pointer-events-none transition-all group-hover:bg-primary/30"></div>
+                <div class="absolute inset-0 cyber-grid opacity-10 pointer-events-none"></div>
+                
+                <span class="absolute -left-8 -top-12 text-[200px] font-headline font-black text-white/[0.02] select-none pointer-events-none tracking-tighter">IMPACT</span>
+                
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <div class="lg:col-span-5">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-4 h-[1px] bg-primary"></div>
+                            <div class="font-mono text-[10px] text-primary tracking-widest uppercase">Proven Results</div>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-headline font-black mb-6 leading-tight">Global Payment<br>Processor Overhaul</h3>
+                        <p class="text-base text-on-surface-variant font-light leading-relaxed mb-8">Assessed and rebuilt legacy architecture for a Fortune 500 platform, implementing stringent data partitioning, zero-trust network access, and automated compliance logic.</p>
+                    </div>
+                    
+                    <div class="lg:col-span-7 grid grid-cols-2 gap-8 lg:border-l border-white/10 lg:pl-12">
+                        <div>
+                            <div class="text-6xl md:text-[5rem] font-headline font-black mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">40<span class="text-primary text-4xl align-top md:text-5xl">%</span></div>
+                            <div class="text-sm text-on-surface-variant font-light leading-tight font-mono tracking-wide uppercase">Reduction in Vulnerabilities</div>
+                        </div>
+                        <div>
+                            <div class="text-6xl md:text-[5rem] font-headline font-black mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">3<span class="text-primary text-4xl align-top md:text-5xl">x</span></div>
+                            <div class="text-sm text-on-surface-variant font-light leading-tight font-mono tracking-wide uppercase">Faster Compliance Exec</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transiton -->
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+    <!-- 8. FINAL CTA SECTION (Immersive emphasis) -->
+    <section class="py-32 md:py-48 relative overflow-hidden">
+        <!-- Huge subtle glow drawing attention to the center CTA -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-[#0a0a0a] to-[#0a0a0a] z-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[200px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="w-16 h-16 border border-primary/40 rounded-xl bg-black shadow-[0_0_30px_rgba(255,106,0,0.2)] flex items-center justify-center mx-auto mb-10">
+                <span class="material-symbols-outlined text-primary text-3xl">shield_lock</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl lg:text-7xl font-headline font-black mb-8 tracking-tighter">Secure Your Infrastructure</h2>
+            <p class="text-lg md:text-xl text-on-surface-variant font-light mb-12 max-w-xl mx-auto leading-relaxed">Partner with Kinetic to build uncompromised enterprise resilience from the foundational layer up.</p>
+            <button class="px-12 py-5 bg-[#FF6A00] text-white font-headline font-bold uppercase tracking-widest text-sm rounded transition-all btn-primary hover:-translate-y-1 scale-105 hover:scale-110 relative group">
+                <span class="absolute inset-0 bg-primary rounded opacity-50 blur-lg group-hover:blur-xl transition-all"></span>
+                <span class="relative z-10">Book Consultation</span>
+            </button>
+        </div>
+    </section>
+
+</main>
+
+<footer class="w-full py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-black border-t border-white/5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-7xl mx-auto text-left">
+        <div class="md:col-span-1">
+            <div class="text-2xl font-black text-white font-headline mb-8 tracking-tighter">KINETIC</div>
+            <p class="text-white/40 font-headline text-sm tracking-tight mb-10 leading-relaxed font-light">High-fidelity digital risk advisory for elite global enterprises.</p>
+            <div class="flex gap-6">
+                <span class="material-symbols-outlined text-white/30 cursor-pointer hover:text-[#FF6A00] transition-colors">language</span>
+                <span class="material-symbols-outlined text-white/30 cursor-pointer hover:text-[#FF6A00] transition-colors">shield</span>
+            </div>
+        </div>
+        <div class="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-12">
+            <div>
+                <h5 class="font-headline font-bold text-white mb-8 uppercase tracking-[0.3em] text-[10px]">Navigation</h5>
+                <ul class="space-y-4">
+                    <li><a class="text-white/40 hover:text-[#FF6A00] transition-colors font-headline text-[13px] font-medium" href="home.html">ABOUT</a></li>
+                    <li><a class="text-primary hover:text-white transition-colors font-headline text-[13px] font-medium" href="advisory.html">ADVISORY</a></li>
+                    <li><a class="text-white/40 hover:text-[#FF6A00] transition-colors font-headline text-[13px] font-medium" href="#">ACADEMY</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-headline font-bold text-white mb-8 uppercase tracking-[0.3em] text-[10px]">Legal</h5>
+                <ul class="space-y-4">
+                    <li><a class="text-white/40 hover:text-[#FF6A00] transition-colors font-headline text-[13px] font-medium" href="#">Privacy Policy</a></li>
+                    <li><a class="text-white/40 hover:text-[#FF6A00] transition-colors font-headline text-[13px] font-medium" href="#">Terms of Service</a></li>
+                    <li><a class="text-white/40 hover:text-[#FF6A00] transition-colors font-headline text-[13px] font-medium" href="#">Security Index</a></li>
+                </ul>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+                <h5 class="font-headline font-bold text-white mb-8 uppercase tracking-[0.3em] text-[10px]">Newsletter</h5>
+                <div class="flex flex-col gap-4">
+                    <input class="bg-white/5 border border-white/10 text-white font-label text-[11px] px-5 py-4 focus:ring-1 focus:ring-[#FF6A00] focus:border-[#FF6A00] outline-none placeholder:text-white/20 rounded" placeholder="ENTER TERMINAL EMAIL" type="email"/>
+                    <button class="bg-[#FF6A00] text-white font-headline font-bold uppercase tracking-[0.3em] text-[10px] py-4 rounded hover:bg-[#ff7a31] transition-all">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-white/20 font-headline text-xs tracking-tight uppercase">© 2024 KINETIC OBSERVATORY. SECURING THE FUTURE.</p>
+        <div class="flex gap-10">
+            <span class="text-white/10 font-label text-[9px] tracking-[0.5em] font-bold">CLEARANCE: LEVEL 5</span>
+            <span class="text-white/10 font-label text-[9px] tracking-[0.5em] font-bold">192.168.0.1</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>'''
+
+with open('c:\\Users\\sy753\\OneDrive\\Pictures\\AIML\\project kinetic assingment\\advisory.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
