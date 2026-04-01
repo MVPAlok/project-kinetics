@@ -79,10 +79,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
         <div class="text-2xl font-black tracking-tighter text-white font-headline">KINETIC</div>
         <div class="hidden md:flex items-center space-x-12">
-            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="home.html">ABOUT</a>
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="home.html">HOME</a>
             <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="advisory.html">ADVISORY</a>
             <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-[#FF6A00] text-glow" href="academy.html">ACADEMY</a>
-            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="#">CONTACT</a>
+            <a class="font-headline uppercase tracking-tighter text-[11px] font-bold transition-colors duration-300 text-white/60 hover:text-[#FF6A00]" href="contact.html">CONTACT</a>
         </div>
         <button class="bg-[#FF6A00] hover:bg-[#ff7a31] btn-primary transition-all duration-300 font-headline uppercase tracking-tighter text-[11px] font-bold px-7 py-2.5 rounded text-white hidden md:block">
             Consultation
@@ -92,68 +92,133 @@
 
 <main class="pt-0">
     <!-- 1. HERO SECTION -->
-    <section class="relative min-h-[100vh] flex flex-col justify-center overflow-hidden cyber-grid">
-        <!-- Ambient background glows -->
+    <section class="relative min-h-[100vh] flex flex-col justify-center overflow-hidden cyber-grid bg-[#0a0a0a] pt-8 md:pt-12">
+        <!-- Ambient depth & texture -->
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0a0a0a] via-[#0b0b0b] to-[#0b0b0b] z-0"></div>       
-        <!-- Right side glow behind geometric shape -->
-        <div class="absolute top-[10%] right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none"></div>     
-        <!-- Left side subtle glow -->
-        <div class="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] bg-[#FF6A00]/5 blur-[150px] rounded-full pointer-events-none"></div>
-        <!-- subtle connecting data line -->
-        <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-y-12"></div>
+        <!-- Subtle noise texture -->
+        <div class="absolute inset-0 opacity-[0.015] pointer-events-none z-0" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        
+        <!-- Right side glow behind geometric shape (Enhanced for depth) -->
+        <div class="absolute top-[5%] right-[5%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.12),transparent_60%)] blur-[100px] rounded-full mix-blend-screen pointer-events-none"></div>     
+        <!-- Left side subtle glow (Flows toward text) -->
+        <div class="absolute bottom-[20%] left-[10%] w-[600px] h-[400px] bg-gradient-to-r from-transparent via-[#FF6A00]/5 to-[#FF6A00]/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+        
+        <!-- System connecting grid lines across both sides -->
+        <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FF6A00]/20 to-transparent -translate-y-16"></div>
+        <div class="absolute top-0 right-[35%] w-[1px] h-full bg-gradient-to-b from-transparent via-[#FF6A00]/10 to-transparent"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-28 md:py-32">
-            <div class="lg:col-span-6 flex flex-col justify-center relative">   
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-24 md:py-32">
+            <div class="lg:col-span-6 flex flex-col justify-center relative z-20">   
+                
+                <!-- Micro UI Elements -->
+                <div class="absolute -left-8 top-0 text-[8px] font-mono text-white/20 tracking-widest hidden lg:block rotate-[-90deg] origin-left">SYS.ACADEMY.01</div>
+                <div class="absolute -left-4 top-20 w-2 h-2 border-t border-l border-[#FF6A00]/40 hidden lg:block"></div>
+                
                 <!-- Small status indicator -->
                 <div class="flex items-center gap-3 mb-8">
                     <div class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6A00] opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF6A00]"></span>
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6A00] opacity-80"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF6A00] shadow-[0_0_10px_rgba(255,106,0,0.6)]"></span>
                     </div>
-                    <span class="text-[10px] font-mono tracking-[0.3em] text-[#FF6A00]/90 uppercase font-bold text-glow">Learning & Development Engine</span>
+                    <span class="text-[10px] font-mono tracking-[0.35em] text-[#FF6A00] uppercase font-bold text-glow">Learning & Development Engine</span>
                 </div>
                 
-                <h1 class="text-5xl md:text-6xl font-headline font-black leading-[1.1] tracking-tighter mb-8 text-white">
+                <h1 class="text-6xl md:text-[68px] lg:text-[72px] font-headline font-black leading-[1.05] tracking-tighter mb-8 text-white">
                     Build Expertise in
                     <br>
-                    <span class="text-[#FF6A00]">Digital Risk &<br>Cyber Resilience</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-b from-[#FF6A00] to-[#ff915a] kinetic-glow relative inline-block">
+                        Digital Risk &
+                        <br>
+                        Cyber Resilience
+                        <!-- Subtle underline glow -->
+                        <div class="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#FF6A00]/0 via-[#FF6A00]/50 to-[#FF6A00]/0 blur-sm"></div>
+                    </span>
                 </h1>
                 
-                <p class="text-on-surface-variant font-light text-lg mb-10 leading-relaxed max-w-[500px]">
+                <p class="text-on-surface-variant font-light text-lg mb-12 leading-relaxed max-w-[520px]">
                     An elite training ecosystem specializing in Cybersecurity, AI Risk, Compliance, and Enterprise Systems. Master the protocols securing the modern enterprise.
                 </p>
                 
-                <div class="flex flex-wrap gap-4">
-                    <button class="px-8 py-3.5 bg-[#FF6A00] text-white font-headline font-semibold uppercase tracking-wider text-xs rounded transition-all btn-primary">
-                        Explore Programs
+                <div class="flex flex-wrap gap-6">
+                    <button class="px-8 py-4 bg-[#FF6A00] text-white font-headline font-semibold uppercase tracking-wider text-xs rounded transition-all duration-300 btn-primary shadow-[0_0_20px_rgba(255,106,0,0.25)] hover:shadow-[0_0_30px_rgba(255,106,0,0.5)] hover:-translate-y-1 border border-[#FF6A00]/50 relative overflow-hidden group">
+                        <span class="relative z-10">Explore Programs</span>
+                        <!-- Button inner shine -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700"></div>
                     </button>
-                    <button class="px-8 py-3.5 border border-white/10 bg-white/[0.02] text-white font-headline font-semibold uppercase tracking-wider text-xs rounded transition-all hover:bg-white/[0.05]">
+                    <button class="px-8 py-4 border border-white/10 bg-white/[0.02] text-white font-headline font-semibold uppercase tracking-wider text-xs rounded transition-all duration-300 hover:bg-white/[0.05] hover:border-white/20 hover:-translate-y-1 shadow-lg">
                         View Learning Path
                     </button>
                 </div>
             </div>
 
-            <!-- Hero Visual Node System -->
-            <div class="lg:col-span-6 relative hidden lg:flex justify-end">
-                <div class="relative w-full max-w-[450px] aspect-square rounded-2xl p-2 glass-panel">
-                    <div class="relative w-full h-full bg-[#0d0d0d] rounded-xl border border-white/5 overflow-hidden flex flex-col justify-center items-center">
-                        <div class="absolute inset-0 cyber-grid opacity-10"></div>
-                        <div class="absolute top-5 left-5 font-mono text-[9px] text-white/40 tracking-widest uppercase">Curriculum Engine</div>
+            <!-- Hero Visual Node System - Enhanced for dominance and depth -->
+            <div class="lg:col-span-6 relative hidden lg:flex justify-end lg:-ml-16 lg:-mt-12 z-10">
+                
+                <!-- Floating Micro Nodes -->
+                <div class="absolute -top-6 right-10 w-1.5 h-1.5 rounded-full bg-[#FF6A00] shadow-[0_0_10px_rgba(255,106,0,0.8)] animate-pulse"></div>
+                <div class="absolute top-1/4 -left-4 w-12 h-[1px] bg-gradient-to-r from-[#FF6A00]/80 to-transparent"></div>
+                <div class="absolute bottom-10 -right-6 text-[9px] font-mono text-[#FF6A00]/50 tracking-widest">v2.0.4.SYNC</div>
+                
+                <!-- Outer glow panel for depth -->
+                <div class="absolute inset-0 bg-[#FF6A00]/5 rounded-2xl blur-xl transform scale-105"></div>
+                
+                <!-- Layer 1: Base Glass Panel -->
+                <div class="relative w-full max-w-[550px] aspect-square rounded-2xl p-3 glass-panel shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    
+                    <!-- Layer 2: Inner Dark Panel with Gradient Border -->
+                    <div class="relative w-full h-full bg-gradient-to-br from-[#0f0f0f] to-[#050505] rounded-xl border border-[#FF6A00]/20 overflow-hidden shadow-[inset_0_0_40px_rgba(255,106,0,0.05)]">
                         
-                        <div class="relative w-32 h-48 flex flex-col justify-between items-center z-10">
-                            <div class="w-10 h-10 rounded bg-[#111] border border-[#FF6A00]/40 flex items-center justify-center shadow-[0_0_20px_rgba(255,106,0,0.2)]">
-                                <span class="material-symbols-outlined text-[#FF6A00] text-lg">model_training</span>
-                            </div>
-                            <div class="w-[1px] h-8 bg-gradient-to-b from-[#FF6A00]/60 to-white/5"></div>
-                            
-                            <div class="w-10 h-10 rounded bg-[#111] border border-white/10 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white/50 text-lg">account_tree</span>
-                            </div>
-                            <div class="w-[1px] h-8 bg-white/5"></div>
+                        <!-- Panel inner textures -->
+                        <div class="absolute inset-0 cyber-grid opacity-[0.15]"></div>
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-[#FF6A00]/10 blur-[60px] rounded-full"></div>
+                        <div class="absolute bottom-0 left-0 w-48 h-48 bg-[#FF6A00]/5 blur-[40px] rounded-full"></div>
 
-                            <div class="w-10 h-10 rounded bg-[#111] border border-white/10 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white/50 text-lg">shield_lock</span>
-                            </div>
+                        <!-- Panel UI Overlays -->
+                        <div class="absolute top-6 left-6 font-mono text-[10px] text-white/50 tracking-widest uppercase flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#FF6A00] rounded-full"></div>
+                            Curriculum Engine
+                        </div>
+                        <div class="absolute top-6 right-6 flex gap-1">
+                            <div class="w-3 h-[2px] bg-white/20"></div>
+                            <div class="w-1 h-[2px] bg-[#FF6A00]/60"></div>
+                        </div>
+                        
+                        <div class="absolute bottom-6 left-6 font-mono text-[8px] text-white/30">MODULE TRACKING : ACTIVE</div>
+                        <div class="absolute bottom-6 right-6 w-16 h-8 border border-white/10 flex items-end p-1 gap-[2px]">
+                            <div class="w-full bg-[#FF6A00]/40 h-[20%]"></div>
+                            <div class="w-full bg-[#FF6A00]/60 h-[40%]"></div>
+                            <div class="w-full bg-[#FF6A00]/80 h-[100%]"></div>
+                            <div class="w-full bg-white/20 h-[60%]"></div>
+                        </div>
+
+                        <!-- Core Node Element -->
+                        <div class="absolute inset-0 flex flex-col justify-center items-center z-10">
+                            <!-- Subtle connecting circle -->
+                            <div class="absolute w-[300px] h-[300px] rounded-full border border-white/5 border-dashed pointer-events-none"></div>
+                            <div class="absolute w-[180px] h-[180px] rounded-full border border-[#FF6A00]/10 pointer-events-none"></div>
+                            
+                            <div class="relative flex flex-col justify-between items-center h-56">
+                                <div class="relative w-12 h-12 rounded-lg bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] border border-[#FF6A00]/50 flex items-center justify-center shadow-[0_0_30px_rgba(255,106,0,0.3)] group cursor-default z-20">
+                                    <div class="absolute inset-0 bg-[#FF6A00]/20 rounded-lg blur-md"></div>
+                                    <span class="material-symbols-outlined text-[#FF6A00] text-xl relative z-10">model_training</span>
+                                    <div class="absolute -right-16 text-[9px] font-mono text-[#FF6A00] tracking-widest">ROOT</div>
+                                </div>
+                                
+                                <!-- Connection line with data flow indicator -->
+                                <div class="relative w-[1px] h-10 bg-gradient-to-b from-[#FF6A00]/80 via-[#FF6A00]/30 to-white/10 z-10 border-l border-dashed border-[#FF6A00]/30">
+                                    <div class="absolute top-0 left-[-2px] w-1 h-3 bg-[#FF6A00] blur-[2px] animate-[ping_2s_infinite]"></div>
+                                </div>
+                                
+                                <div class="w-10 h-10 rounded-lg bg-[#111] border border-white/10 flex items-center justify-center relative z-20 hover:border-[#FF6A00]/40 transition-colors">
+                                    <span class="material-symbols-outlined text-white/60 text-lg">account_tree</span>
+                                </div>
+                                
+                                <div class="w-[1px] h-10 bg-gradient-to-b from-white/10 to-white/5 z-10"></div>
+                                
+                                <div class="w-10 h-10 rounded-lg bg-[#111] border border-white/10 flex items-center justify-center relative z-20 hover:border-[#FF6A00]/40 transition-colors">
+                                    <span class="material-symbols-outlined text-white/50 text-lg">shield_lock</span>
+                                    <div class="absolute -left-16 text-[9px] font-mono text-white/30 tracking-widest">SEC</div>
+                                </div>
                         </div>
                     </div>
                 </div>
